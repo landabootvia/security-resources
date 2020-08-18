@@ -1,6 +1,5 @@
 #!/bin/bash
 
-```
 apt update && apt upgrade -y && apt install git mosh aptitude ack docker-compose sudo openvpn htop atop virtualenv -y
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 cd /opt
@@ -240,5 +239,4 @@ docker stop covenant
 echo "Stopping Docker"
 /etc/init.d/docker stop
 
-````
 
