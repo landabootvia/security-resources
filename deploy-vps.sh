@@ -1,7 +1,6 @@
 #!/bin/bash
 
 apt update && apt upgrade -y && apt install git mosh aptitude ack docker-compose sudo openvpn htop atop virtualenv -y
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 cd /opt
 git clone https://github.com/Wh1t3Rh1n0/deb2kali
 bash deb2kali/deb2kali.sh
@@ -239,4 +238,5 @@ docker stop covenant
 echo "Stopping Docker"
 /etc/init.d/docker stop
 
-
+#Installing oh-my-bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
