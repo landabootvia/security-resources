@@ -230,7 +230,6 @@ cd ~/
 git clone --recurse-submodules https://github.com/cobbr/Covenant
 cd Covenant/Covenant
 docker build -t covenant .
-docker run -p 7443:7443 -p 80:80 -p 443:443 --name covenant -v ~/Covenant/Covenant/Data:/app/Data covenant &
 sleep 5
 docker stop covenant
 
@@ -268,6 +267,11 @@ git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
 
+
+export GO111MODULE=on
+go get -v github.com/OWASP/Amass/v3/...
+
+echo "export GO111MODULE=on" >> ~/root/.bashrc
 
 
 #Installing oh-my-bash
