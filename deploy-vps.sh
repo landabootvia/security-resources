@@ -216,7 +216,6 @@ git clone https://github.com/Greenwolf/Spray spray
 echo "Installing Docker Empire BC Security"
 
 mkdir -p ~/tools/empire && docker pull bcsecurity/empire
-docker run --name empire -p 1337:1337 -p 443:443 -p 8080-8090:8080 bcsecurity/empire
 docker stop empire
 
 echo "Installing DoxyCannon"
@@ -237,6 +236,39 @@ docker stop covenant
 
 echo "Stopping Docker"
 /etc/init.d/docker stop
+
+gem update
+gem install whois
+
+pip install shodan
+
+#Installing slacktee
+cd ~/tools
+git clone https://github.com/course-hero/slacktee.git
+bash ./slacktee/install.sh
+ln -s ~/tools/slacktee/slacktee.sh /usr/bin/slacktee
+
+#Setting somethings up...
+ln -s ~/tools/Sublist3r/sublist3r.py /usr/bin/sublister
+
+cd ~/tools && git clone https://github.com/christophetd/censys-subdomain-finder
+pip install censys
+
+go get github.com/Q2h1Cg/dnsbrute
+
+mkdir subfinder && cd subfinder
+wget https://github.com/projectdiscovery/subfinder/releases/download/v2.4.5/subfinder_2.4.5_linux_amd64.tar.gz
+tar -xvzf subfinder_2.4.5_linux_amd64.tar.gz
+ln -s ~/tools/subfinder/subfinder /usr/bin/subfinder
+
+rm -rf *.tar.gz
+
+cd
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
+
+
 
 #Installing oh-my-bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
