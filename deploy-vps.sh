@@ -274,5 +274,10 @@ go get -v github.com/OWASP/Amass/v3/...
 echo "export GO111MODULE=on" >> ~/root/.bashrc
 
 
+cd ~/tools && git clone --depth 1 https://github.com/drwetter/testssl.sh.git
+ln -s ~/tools/testssl.sh/testssl.sh /usr/bin/testssl
+
 #Installing oh-my-bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
+
