@@ -9,7 +9,7 @@ apt install docker.io -y
 clear
 cd /tmp
 echo "Installing Golang"
-wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.14.4.linux-amd64.tar.gz
 sudo tar -xvf go1.13.4.linux-amd64.tar.gz
 sudo mv go /usr/local
 export GOROOT=/usr/local/go
@@ -211,6 +211,7 @@ mv Tiny-XSS-Payloads-master Tiny-XSS-Payloads
 clear 
 
 cd ~/tools
+git clone https://github.com/projectdiscovery/nuclei.git; cd nuclei/v2/cmd/nuclei/; go build; mv nuclei /usr/local/bin/; nuclei -version
 git clone https://github.com/Greenwolf/Spray spray
 
 echo "Installing Docker Empire BC Security"
