@@ -1,11 +1,11 @@
 #!/bin/bash
 
-apt update && apt upgrade -y && apt install git mosh aptitude ack docker-compose sudo openvpn htop atop virtualenv -y
+apt update && apt upgrade -y && apt install tmux git mosh aptitude ack docker-compose sudo openvpn htop atop virtualenv -y
 cd /opt
 git clone https://github.com/Wh1t3Rh1n0/deb2kali
 bash deb2kali/deb2kali.sh
 
-apt install docker.io tmux
+apt install docker.io -y
 clear
 cd /tmp
 echo "Installing Golang"
