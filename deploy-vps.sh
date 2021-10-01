@@ -210,58 +210,51 @@ mv Tiny-XSS-Payloads-master Tiny-XSS-Payloads
 
 clear 
 
-cd ~/tools
-git clone https://github.com/projectdiscovery/nuclei.git; cd nuclei/v2/cmd/nuclei/; go build; mv nuclei /usr/local/bin/; nuclei -version
-git clone https://github.com/Greenwolf/Spray spray
-
 echo "Installing Docker Empire BC Security"
 
 mkdir -p ~/tools/empire && docker pull bcsecurity/empire
 docker stop empire
 
 echo "Installing DoxyCannon"
-cd /opt && git clone https://github.com/audibleblink/doxycannon && cd doxycannon
+cd ~/tools && git clone https://github.com/audibleblink/doxycannon && cd doxycannon
 virtualenv pyenv
 source pyenv/bin/activate
 pip3 install -r requirements.txt
 deactivate
 
-echo "Installing Docker Covenant"
-cd ~/
-git clone --recurse-submodules https://github.com/cobbr/Covenant
-cd Covenant/Covenant
-docker build -t covenant .
-sleep 5
-docker stop covenant
+pip install shodan
+pip install censys
 
-echo "Stopping Docker"
-/etc/init.d/docker stop
+#echo "Installing Docker Covenant"
+#cd ~/
+#git clone --recurse-submodules https://github.com/cobbr/Covenant
+#cd Covenant/Covenant
+#docker build -t covenant .
+#sleep 5
+#docker stop covenant
+
 
 gem update
 gem install whois
 
-pip install shodan
+
+cd ~/tools && git clone https://github.com/projectdiscovery/nuclei-templates
+cd ~/tools && git clone https://github.com/Greenwolf/Spray spray
+cd ~/tools && git clone https://github.com/christophetd/censys-subdomain-finder
+cd ~/tools && git clone --depth 1 https://github.com/drwetter/testssl.sh.git && ln -s ~/tools/testssl.sh/testssl.sh /usr/bin/testssl
+cd ~/tools && git clone https://github.com/aboul3la/Sublist3r.git && cd Sublist3r && pip install -r requirements.txt && ln -s ./Sublist3r.py /usr/bin/sublister
+
 
 #Installing slacktee
-cd ~/tools
-git clone https://github.com/course-hero/slacktee.git
-bash ./slacktee/install.sh
-ln -s ~/tools/slacktee/slacktee.sh /usr/bin/slacktee
+cd ~/tools && git clone https://github.com/course-hero/slacktee.git && bash ./slacktee/install.sh && ln -s ~/tools/slacktee/slacktee.sh /usr/bin/slacktee
 
 #Setting somethings up...
-ln -s ~/tools/Sublist3r/sublist3r.py /usr/bin/sublister
 
-cd ~/tools && git clone https://github.com/christophetd/censys-subdomain-finder
-pip install censys
 
-go get github.com/Q2h1Cg/dnsbrute
+wget https://github.com/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip
+unzip subfinder*.zip && rm -rf subfinder*.zip && mv ./subfinder /root/go/bin/
 
-mkdir subfinder && cd subfinder
-wget https://github.com/projectdiscovery/subfinder/releases/download/v2.4.5/subfinder_2.4.5_linux_amd64.tar.gz
-tar -xvzf subfinder_2.4.5_linux_amd64.tar.gz
-ln -s ~/tools/subfinder/subfinder /usr/bin/subfinder
-
-rm -rf *.tar.gz
+rm -rf *.tar.gz && rm -rf *.zip
 
 cd
 git clone https://github.com/gpakosz/.tmux.git
@@ -269,20 +262,37 @@ ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
 
 
+#Installing go based tools :D
+echo "export GO111MODULE=on" >> ~/root/.bashrc
 export GO111MODULE=on
 go get -v github.com/OWASP/Amass/v3/...
-
-echo "export GO111MODULE=on" >> ~/root/.bashrc
-
-cd ~/tools
-git clone https://github.com/projectdiscovery/nuclei-templates
+go get github.com/Q2h1Cg/dnsbrute
+go get -u github.com/shenwei356/rush/
+go get -v github.com/projectdiscovery/dnsx/cmd/dnsx
+GO111MODULE=on go get -v github.com/projectdiscovery/httpx/cmd/httpx
+GO111MODULE=on go get -v github.com/projectdiscovery/naabu/v2/cmd/naabu
+GO111MODULE=on go get -v github.com/projectdiscovery/proxify/cmd/proxify
 GO111MODULE=on go get -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei
+GO111MODULE=on go get -u github.com/jaeles-project/gospider
+GO111MODULE=on go get -v github.com/projectdiscovery/notify/cmd/notify
+GO111MODULE=on go get github.com/j3ssie/metabigor
 GO111MODULE=on go get github.com/jaeles-project/jaeles
+GO111MODULE=on go get -v github.com/projectdiscovery/interactsh/cmd/interactsh-client
+GO111MODULE=on go get -u -v github.com/lc/gau
+GO111MODULE=on go get -v github.com/projectdiscovery/mapcidr/cmd/mapcidr
+go get -u github.com/tomnomnom/httprobe
+go install github.com/hakluke/hakrawler@latest
+go get github.com/tomnomnom/waybackurls
+go get -u github.com/tomnomnom/anew
+go get -u github.com/tomnomnom/assetfinder
+go get -u github.com/ffuf/ffuf
+go get github.com/famasoon/crtsh
 
 
+#Setting gowitness
+cd /root/go/bin && wget https://github.com/sensepost/gowitness/releases/download/2.3.6/gowitness-2.3.6-linux-amd64 && mv gowitness* gowitness && chmod +x gowitness && cd ~/tools
+cd /tmp && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb && cd ~/tools
 
-cd ~/tools && git clone --depth 1 https://github.com/drwetter/testssl.sh.git
-ln -s ~/tools/testssl.sh/testssl.sh /usr/bin/testssl
 
 #Installing oh-my-bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
