@@ -9,17 +9,16 @@ apt install docker.io -y
 clear
 cd /tmp
 echo "Installing Golang"
-wget https://dl.google.com/go/go1.14.4.linux-amd64.tar.gz
-tar -xvf go1.14.4.linux-amd64.tar.gz
-sudo mv go /usr/local
+wget https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
-echo 'export GOPATH=$HOME/go'   >> ~/.bash_profile
-echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile     
-source ~/.bash_profile
-sleep 1
+echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+echo 'export GOPATH=$HOME/go'   >> ~/.bashrc
+echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
 
 clear
 echo "Installing BBHT"
@@ -222,8 +221,7 @@ source pyenv/bin/activate
 pip3 install -r requirements.txt
 deactivate
 
-pip install shodan
-pip install censys
+pip install shodan censys
 
 #echo "Installing Docker Covenant"
 #cd ~/
@@ -280,21 +278,21 @@ GO111MODULE=on go get github.com/jaeles-project/jaeles
 GO111MODULE=on go get -v github.com/projectdiscovery/interactsh/cmd/interactsh-client
 GO111MODULE=on go get -u -v github.com/lc/gau
 GO111MODULE=on go get -v github.com/projectdiscovery/mapcidr/cmd/mapcidr
-go get -u github.com/tomnomnom/httprobe
+go install github.com/tomnomnom/httprobe
 go install github.com/hakluke/hakrawler@latest
-go get github.com/tomnomnom/waybackurls
-go get -u github.com/tomnomnom/anew
-go get -u github.com/tomnomnom/assetfinder
-go get -u github.com/ffuf/ffuf
-go get github.com/famasoon/crtsh
+go install github.com/tomnomnom/waybackurls
+go install github.com/tomnomnom/anew
+go install github.com/tomnomnom/assetfinder
+go install github.com/ffuf/ffuf
+go install github.com/famasoon/crtsh
 
 
 #Setting gowitness
 cd /root/go/bin && wget https://github.com/sensepost/gowitness/releases/download/2.3.6/gowitness-2.3.6-linux-amd64 && mv gowitness* gowitness && chmod +x gowitness && cd ~/tools
 cd /tmp && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb && cd ~/tools
 
-
 #Installing oh-my-bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-
+# Cleaning .git folder
+cd /root/tools && rm -rf */.git/
