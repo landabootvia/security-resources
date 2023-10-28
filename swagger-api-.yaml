@@ -28,6 +28,7 @@ requests:
       - "{{BaseURL}}/index3.html"
       - "{{BaseURL}}/swagger-ui/swagger-ui.js"
       - "{{BaseURL}}/swagger-ui/swagger.js"
+      - "{{BaseURL}}/swagger-ui/index.html"
       - "{{BaseURL}}/v2/api-docs"
       - "{{BaseURL}}/v1/api-docs"
       - "{{BaseURL}}/v3/api-docs"
@@ -152,7 +153,9 @@ requests:
           - "Swagger UI"
           - "loadSwaggerUI"
           - "**token**:"
+          - "openapi\":"
           - "id=\"swagger-ui"
+          - "basePath\":"
         condition: or
 
       - type: status
