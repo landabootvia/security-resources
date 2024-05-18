@@ -5,6 +5,7 @@
   - https://github.com/NVISOsecurity/disable-flutter-tls-verification
   - https://codeshare.frida.re/@dzonerzy/fridantiroot
   - https://codeshare.frida.re/@meerkati/universal-android-debugging-bypass
+  - https://codeshare.frida.re/@khantsithu1998/bypass-react-native-emulator-detection/
 */
 
 Java.perform(function() {
@@ -1254,3 +1255,27 @@ setTimeout(function() {
         }
     });
 }, 0);
+
+
+/* 
+   Bypass react-native-device-info emulator detection
+   $ frida --codeshare khantsithu1998/bypass-react-native-emulator-detection -U -f <your-application-package-name>
+   By Khant Si Thu (https://twitter.com/KhantZero)
+*/
+
+if (Java.available) {
+    Java.perform(function() {
+        try {
+            var Activity = Java.use("com.learnium.RNDeviceInfo.RNDeviceModule");
+            Activity.isEmulator.implementation = function() {
+                Promise.resolve(false)
+            }
+        } catch (error) {
+            console.log("[-] Error Detected");
+            console.log((error.stack));
+        }
+    });
+} else {
+    console.log("")
+    console.log("[-] Java is Not available");
+}
